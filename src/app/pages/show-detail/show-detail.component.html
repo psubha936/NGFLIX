@@ -1,0 +1,107 @@
+<ng-container *ngIf="show$ | async as show">
+  <app-slider [slides]="[show]" [isHeader]="true"></app-slider>
+
+  <p-tabView>
+    <p-tabPanel header="Overview">
+      <div class="grid">
+        <div class="col-3">
+          <img
+            class="poster"
+            [src]="imagesSizes.medium + show.poster_path"
+            alt=""
+          />
+        </div>
+        <div class="col-9">
+          <h2>Overview</h2>
+          <p class="overview">{{ show.overview }}</p>
+          <div class="stat">
+            <div class="label">Release Date:</div>
+            <div class="value">
+              {{ show.release_date | date : 'dd.MM.yyyy' }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Language</div>
+            <div class="value">
+              {{ show.original_language }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Revenue:</div>
+            <div class="value">
+              {{ show.revenue | currency }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Duration:</div>
+            <div class="value">{{ show.runtime }} min</div>
+          </div>
+          <div class="stat">
+            <div class="label">Status:</div>
+            <div class="value">
+              {{ show.status }}
+            </div>
+          </div>
+          <div class="stat">
+            <div class="label">Genres:</div>
+            <div class="value">
+              <span *ngFor="let genre of show.genres">
+                {{ genre.name }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Videos">
+      <ng-container *ngIf="showVideos$ | async as showVideos">
+        <div class="grid">
+          <div class="col-4" *ngFor="let showVideo of showVideos">
+            <app-video-embed [key]="showVideo.key"></app-video-embed>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+    <p-tabPanel header="Photos">
+      <ng-container *ngIf="showImages$ | async as showImages">
+        <div class="grid">
+          <div class="col-2" *ngFor="let showImage of showImages">
+            <p-image
+              [src]="imagesSizes.large + showImage.file_path"
+              [alt]="show.title"
+              width="100%"
+              [preview]="true"
+            ></p-image>
+          </div>
+        </div>
+      </ng-container>
+    </p-tabPanel>
+  </p-tabView>
+
+  <ng-container *ngIf="showCast$ | async as actors">
+    <p-carousel
+      [value]="actors"
+      [numVisible]="6"
+      [numScroll]="3"
+      [circular]="false"
+    >
+      <ng-template let-actor pTemplate="item">
+        <div class="actor">
+          <img
+            *ngIf="actor.profile_path; else defaultActorPhoto"
+            [src]="imagesSizes.medium + actor.profile_path"
+            alt=""
+          />
+          <div>{{ actor.name }}</div>
+          <div>({{ actor.character }})</div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </ng-container>
+  <ng-container *ngIf="similarShows$ | async as similarShows">
+    <app-banner title="Watch Similar" [shows]="similarShows" />
+  </ng-container>
+</ng-container>
+<ng-template #defaultActorPhoto>
+  <img src="/assets/images/actor.jpg" alt="No Pitcure" />
+</ng-template>

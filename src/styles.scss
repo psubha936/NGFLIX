@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'node_modules/modern-normalize/modern-normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+@import 'node_modules/primeflex/primeflex.css';
+@import 'primeicons/primeicons.css';
+@import 'primeng/resources/themes/md-dark-indigo/theme.css';
+@import 'primeng/resources/primeng.css';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+  background-color: #141414;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 400;
+}
+
+.container {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}

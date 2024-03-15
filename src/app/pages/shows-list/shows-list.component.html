@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="searchValue"
+          (change)="searchChanged()"
+        />
+      </span>
+    </div>
+  </div>
+  <ng-container *ngIf="showsList$ | async as showsList">
+    <div class="grid">
+      <div class="col-2" *ngFor="let show of showsList.results">
+        <app-show-item [showItem]="show" [showType]="showsType" />
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12">
+        <p-paginator
+          (onPageChange)="pageChanged($event)"
+          [rows]="20"
+          [totalRecords]="showsList.total_results"
+        ></p-paginator>
+      </div>
+    </div>
+  </ng-container>
+</div>
