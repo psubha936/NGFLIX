@@ -1,0 +1,50 @@
+@import '../../../styles/colors';
+
+::ng-deep {
+  .p-tabview .p-tabview-nav {
+    justify-content: center;
+  }
+
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: $primary-color;
+  }
+
+  .p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    background-color: $primary-color;
+  }
+}
+
+.poster {
+  max-width: 100%;
+}
+
+.overview {
+  line-height: 1.5;
+}
+
+.stat {
+  display: flex;
+  margin-bottom: 15px;
+  .label {
+    width: 150px;
+    font-weight: bold;
+  }
+
+  .value {
+    color: $primary-color;
+  }
+}
+
+.show-image {
+  width: 100%;
+}
+
+.actor {
+  padding: 10px;
+  img {
+    width: 100%;
+  }
+  div {
+    text-align: center;
+  }
+}
